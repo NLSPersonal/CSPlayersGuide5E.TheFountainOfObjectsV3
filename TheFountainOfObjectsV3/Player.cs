@@ -3,19 +3,14 @@
     public class Player
     {
         // Variables
-        private CaveRoom _currentCaveRoom;
 
         // Properties
-        public CaveRoom CurrentCaveRoom
-        {
-            get { return _currentCaveRoom; }
-            set { _currentCaveRoom = value; }
-        }
+        public CaveRoom CurrentCaveRoom {  get; set; }
 
         // Constructors
-        public Player(Cave passedCave)
+        public Player(Cave Cave)
         {
-            _currentCaveRoom = passedCave.CaveRoom[passedCave.CaveEntrance.Row, passedCave.CaveEntrance.Column];
+            CurrentCaveRoom = Cave.CaveRoom[Cave.CaveEntrance.Row, Cave.CaveEntrance.Column];
         }
 
         // Methods
@@ -36,7 +31,7 @@
             }
         }
 
-        public void Decide(Cave passedCave)
+        public void Decide(Cave Cave)
         {
             bool isValid = false;
             while (isValid == false)
@@ -45,22 +40,22 @@
                 switch (userRequestedAction.ToLower())
                 {
                     case "move north":
-                        Move("north", passedCave);
+                        Move("north", Cave);
                         isValid = true;
                         break;
 
                     case "move east":
-                        Move("east", passedCave);
+                        Move("east", Cave);
                         isValid = true;
                         break;
 
                     case "move south":
-                        Move("south", passedCave);
+                        Move("south", Cave);
                         isValid = true;
                         break;
 
                     case "move west":
-                        Move("west", passedCave);
+                        Move("west", Cave);
                         isValid = true;
                         break;
 
@@ -76,14 +71,14 @@
             }
         }
 
-        public void Move(string passedMove, Cave passedCave)
+        public void Move(string Move, Cave Cave)
         {
-            switch (passedMove)
+            switch (Move)
             {
                 case "north":
-                    if (CurrentCaveRoom.CaveRoomLocation.Row < passedCave.AmountOfCaveColumns - 1)
+                    if (CurrentCaveRoom.CaveRoomLocation.Row < Cave.AmountOfCaveColumns - 1)
                     {
-                        _currentCaveRoom = passedCave.CaveRoom[CurrentCaveRoom.CaveRoomLocation.Row + 1, CurrentCaveRoom.CaveRoomLocation.Column];
+                        CurrentCaveRoom = Cave.CaveRoom[CurrentCaveRoom.CaveRoomLocation.Row + 1, CurrentCaveRoom.CaveRoomLocation.Column];
                     }
                     else
                     {
@@ -93,9 +88,9 @@
 
 
                 case "east":
-                    if (CurrentCaveRoom.CaveRoomLocation.Column < passedCave.AmountOfCaveRows - 1)
+                    if (CurrentCaveRoom.CaveRoomLocation.Column < Cave.AmountOfCaveRows - 1)
                     {
-                        _currentCaveRoom = passedCave.CaveRoom[CurrentCaveRoom.CaveRoomLocation.Row, CurrentCaveRoom.CaveRoomLocation.Column + 1];
+                        CurrentCaveRoom = Cave.CaveRoom[CurrentCaveRoom.CaveRoomLocation.Row, CurrentCaveRoom.CaveRoomLocation.Column + 1];
                     }
                     else
                     {
@@ -106,7 +101,7 @@
                 case "south":
                     if (CurrentCaveRoom.CaveRoomLocation.Row > 0)
                     {
-                        _currentCaveRoom = passedCave.CaveRoom[CurrentCaveRoom.CaveRoomLocation.Row - 1, CurrentCaveRoom.CaveRoomLocation.Column];
+                        CurrentCaveRoom = Cave.CaveRoom[CurrentCaveRoom.CaveRoomLocation.Row - 1, CurrentCaveRoom.CaveRoomLocation.Column];
                     }
                     else
                     {
@@ -117,7 +112,7 @@
                 case "west":
                     if (CurrentCaveRoom.CaveRoomLocation.Column > 0)
                     {
-                        _currentCaveRoom = passedCave.CaveRoom[CurrentCaveRoom.CaveRoomLocation.Row, CurrentCaveRoom.CaveRoomLocation.Column - 1];
+                        CurrentCaveRoom = Cave.CaveRoom[CurrentCaveRoom.CaveRoomLocation.Row, CurrentCaveRoom.CaveRoomLocation.Column - 1];
                     }
                     else
                     {

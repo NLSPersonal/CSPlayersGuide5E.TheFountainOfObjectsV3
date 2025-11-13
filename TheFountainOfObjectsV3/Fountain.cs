@@ -3,14 +3,9 @@
     public class Fountain
     {
         // Variables
-        private bool _isEnabled = false;
 
         // Properties
-        public bool IsEnabled
-        {
-            get { return _isEnabled; }
-            set { _isEnabled = value; }
-        }
+        public bool IsEnabled { get; set; }
 
         // Constructors
 
