@@ -3,35 +3,15 @@
     public class Game
     {
         // Variables
-        private Player _player1;
-        private Cave _cave;
-        private bool _gameHasBeenWon = false;
-        private bool _gameHasBeenLost = false;
 
         // Properties
-        public Player Player1
-        {
-            get { return _player1; }
-            set { _player1 = value; }
-        }
+        public Player Player1 { get; set; }
 
-        public Cave Cave
-        {
-            get { return _cave; }
-            set { _cave = value; }
-        }
+        public Cave Cave { get; set; }
 
-        public bool GameHasBeenWon
-        {
-            get { return _gameHasBeenWon; }
-            set { _gameHasBeenWon = value; }
-        }
+        public bool GameHasBeenWon { get; set; }
 
-        public bool GameHasBeenLost
-        {
-            get { return _gameHasBeenLost; }
-            set { _gameHasBeenLost = value; }
-        }
+        public bool GameHasBeenLost { get; set; }
 
         // Constructors
 
@@ -66,20 +46,20 @@
                 switch (userRequestedCaveSize.ToLower())
                 {
                     case "small":
-                        _cave = new Cave(CaveSize.Small);
-                        _player1 = new Player(Cave);
+                        Cave = new Cave(CaveSize.Small);
+                        Player1 = new Player(Cave);
                         isValid = true;
                         break;
 
                     case "medium":
-                        _cave = new Cave(CaveSize.Medium);
-                        _player1 = new Player(Cave);
+                        Cave = new Cave(CaveSize.Medium);
+                        Player1 = new Player(Cave);
                         isValid = true;
                         break;
 
                     case "large":
-                        _cave = new Cave(CaveSize.Large);
-                        _player1 = new Player(Cave);
+                        Cave = new Cave(CaveSize.Large);
+                        Player1 = new Player(Cave);
                         isValid = true;
                         break;
 
@@ -103,9 +83,9 @@
             }
         }
 
-        public void CheckIfGameHasBeenWon(Cave passedCave, Player passedPlayer)
+        public void CheckIfGameHasBeenWon(Cave Cave, Player Player)
         {
-            if ((passedCave.CaveRoom[passedCave.FountainLocation.Row, passedCave.FountainLocation.Column].Fountain.IsEnabled == true) && (passedPlayer.CurrentCaveRoom == passedCave.CaveRoom[passedCave.CaveEntrance.Row, passedCave.CaveEntrance.Column]))
+            if ((Cave.CaveRoom[Cave.FountainLocation.Row, Cave.FountainLocation.Column].Fountain.IsEnabled == true) && (Player.CurrentCaveRoom == Cave.CaveRoom[Cave.CaveEntrance.Row, Cave.CaveEntrance.Column]))
             {
                 Console.WriteLine("\n----------------------------------------");
                 Console.WriteLine($"You are in the room at (Row:{Player1.CurrentCaveRoom.CaveRoomLocation.Row}, Column:{Player1.CurrentCaveRoom.CaveRoomLocation.Column})");

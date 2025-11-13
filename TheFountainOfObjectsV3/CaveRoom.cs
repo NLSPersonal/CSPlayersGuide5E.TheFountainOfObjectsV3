@@ -3,46 +3,30 @@
     public class CaveRoom
     {
         // Variables
-        private (int Row, int Column) _caveRoomLocation; // TO DO change this to be _caveRoomLocation and its associated property.
-        private CaveRoomType _caveRoomType;
-        private Fountain? _fountain;
-
         // Properties
-        public (int Row, int Column) CaveRoomLocation
-        {
-            get { return _caveRoomLocation; }
-            set { _caveRoomLocation = value; }
-        }
+        public (int Row, int Column) CaveRoomLocation { get; set; }
 
-        public CaveRoomType CaveRoomType
-        {
-            get { return _caveRoomType; }
-            set { _caveRoomType = value; }
-        }
+        public CaveRoomType CaveRoomType { get; set; }
 
-        public Fountain? Fountain
-        {
-            get { return _fountain; }
-            set { _fountain = value; }
-        }
+        public Fountain? Fountain { get; set; }
 
         // Constructors
-        public CaveRoom(int passedRow, int passedColumn, (int Row, int Column) passedCaveEntrance, (int Row, int Column) passedFountainLocation)
+        public CaveRoom(int Row, int Column, (int Row, int Column) CaveEntrance, (int Row, int Column) FountainLocation)
         {
-            _caveRoomLocation = (Row: passedRow, Column: passedColumn);
-            _caveRoomType = CaveRoomType.Normal;
-            _fountain = null;
+            CaveRoomLocation = (Row: Row, Column: Column);
+            CaveRoomType = CaveRoomType.Normal;
+            Fountain = null;
 
-                if (_caveRoomLocation == passedCaveEntrance)
-                {
-                    _caveRoomType = CaveRoomType.Entrance;
-                }
+            if (CaveRoomLocation == CaveEntrance)
+            {
+                CaveRoomType = CaveRoomType.Entrance;
+            }
 
-                if (_caveRoomLocation == passedFountainLocation)
-                {
-                    _caveRoomType = CaveRoomType.DisabledFountain;
-                    _fountain = new Fountain();
-                }
+            if (CaveRoomLocation == FountainLocation)
+            {
+                CaveRoomType = CaveRoomType.DisabledFountain;
+                Fountain = new Fountain();
+            }
         }
     }
 }
