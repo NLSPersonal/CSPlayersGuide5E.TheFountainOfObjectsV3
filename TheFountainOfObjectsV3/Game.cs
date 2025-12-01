@@ -42,7 +42,9 @@
             bool isValid = false;
             while (isValid == false)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 string userRequestedCaveSize = Console.ReadLine();
+                Console.ResetColor();
                 switch (userRequestedCaveSize.ToLower())
                 {
                     case "small":

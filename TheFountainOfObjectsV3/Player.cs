@@ -51,7 +51,9 @@
             bool isValid = false;
             while (isValid == false)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 string userRequestedAction = Console.ReadLine();
+                Console.ResetColor();
                 switch (userRequestedAction.ToLower())
                 {
                     case "move north":
