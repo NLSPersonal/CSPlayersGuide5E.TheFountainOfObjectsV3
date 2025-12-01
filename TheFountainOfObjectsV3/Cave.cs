@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace TheFountainOfObjectsV3
+﻿namespace TheFountainOfObjectsV3
 {
     public class Cave
     {
@@ -23,6 +21,8 @@ namespace TheFountainOfObjectsV3
 
         public static List<Location> PitLocations { get; set; }
 
+        public static List<Location> MaelstromLocations { get; set; }
+
         // Constructors - 
         public Cave(CaveSize caveSize)
         {
@@ -36,6 +36,7 @@ namespace TheFountainOfObjectsV3
                 CaveEntrance = new Location(0,0);
                 FountainLocation = new Location(0, 2);
                 PitLocations = new List<Location> { new Location(2, 1)};
+                MaelstromLocations = new List<Location> { new Location(1, 2) };
 
                 // TO DO: Refactor to remove arrayCounter if not needed
                 int arrayCounter = 0;
@@ -58,6 +59,7 @@ namespace TheFountainOfObjectsV3
                 CaveEntrance = new Location(0, 0);
                 FountainLocation = new Location(0, 2);
                 PitLocations = new List<Location> { new Location(2, 2) };
+                MaelstromLocations = new List<Location> { new Location(1, 1), new Location(0, 5), new Location(1, 0)};
 
                 int arrayCounter = 0;
                 for (int columnCounter = 0; columnCounter < AmountOfCaveColumns; columnCounter++)
@@ -79,6 +81,7 @@ namespace TheFountainOfObjectsV3
                 CaveEntrance = new Location(0, 0);
                 FountainLocation = new Location(0, 3);
                 PitLocations = new List<Location> { new Location(2, 1) };
+                MaelstromLocations = new List<Location> { new Location(1, 2) };
 
                 int arrayCounter = 0;
                 for (int columnCounter = 0; columnCounter < AmountOfCaveColumns; columnCounter++)
@@ -92,5 +95,6 @@ namespace TheFountainOfObjectsV3
         }
 
         // Methods - 
+
     }
 }

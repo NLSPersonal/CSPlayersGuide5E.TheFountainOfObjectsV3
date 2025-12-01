@@ -36,6 +36,15 @@
                     break;
                 }
             }
+
+            foreach (Location maelstrom in Cave.MaelstromLocations)
+            {
+                if (Location.Equals(maelstrom))
+                {
+                    CaveRoomType = CaveRoomType.Maelstrom;
+                    break;
+                }
+            }
         }
 
         // Methods -

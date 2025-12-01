@@ -38,6 +38,11 @@
                 {
                     Console.WriteLine("Careful! You sense a pit nearby!");
                 }
+
+                if (caveRoomType == CaveRoomType.Maelstrom)
+                {
+                    Console.WriteLine("You hear the growling and groaning of a maelstrom nearby!");
+                }
             }
         }
 

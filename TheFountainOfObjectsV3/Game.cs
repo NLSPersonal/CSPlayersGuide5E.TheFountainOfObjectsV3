@@ -79,6 +79,7 @@
                 Player1.Sense(Cave);
                 Console.WriteLine("What do you want to do?");
                 Player1.Decide(Cave);
+                CheckIfPlayerHasBeenTransportedByMaelstrom(Cave, Player1);
                 CheckIfGameHasBeenWon(Cave, Player1);
                 CheckIfGameHasBeenLost(Cave, Player1);
             }
@@ -103,6 +104,20 @@
                 Console.WriteLine($"You are in the room at (Row:{Player1.Location.Row}, Column:{Player1.Location.Column})");
                 Console.WriteLine("You feel the ground below your feet, and then suddenly you don't. You tumble down the pit. You are never seen again. Game over!");
                 GameHasBeenLost = true;
+            }
+        }
+        // Check if player has been transported by maelstrom. If so, move player one space to the north and two spaces east, wrapping around the cave as needed.
+        public void CheckIfPlayerHasBeenTransportedByMaelstrom(Cave cave, Player player)
+        {
+            while (cave.CaveRoom[player.Location.Row, player.Location.Column].CaveRoomType == CaveRoomType.Maelstrom)
+            {
+                Console.WriteLine("\n----------------------------------------");
+                Console.WriteLine($"You are in the room at (Row:{Player1.Location.Row}, Column:{Player1.Location.Column})");
+                Console.WriteLine("A maelstrom has caught you! You are being transported to another location in the cave!");
+                int newRow = (player.Location.Row + 1 + cave.AmountOfCaveRows) % cave.AmountOfCaveRows;
+                int newColumn = (player.Location.Column + 2) % cave.AmountOfCaveColumns;
+                player.Location = new Location(newRow, newColumn);
+                Console.WriteLine($"You have been transported to the room at (Row:{Player1.Location.Row}, Column:{Player1.Location.Column})");
             }
         }
     }
