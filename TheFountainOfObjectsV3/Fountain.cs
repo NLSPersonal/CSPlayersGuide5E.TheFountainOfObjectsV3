@@ -2,15 +2,20 @@
 {
     public class Fountain
     {
-        // Variables
+        // Variables -
 
-        // Properties
+        // Properties -
+        public Location Location { get; set; }
         public bool IsEnabled { get; set; }
 
-        // Constructors
+        // Constructors -
+        public Fountain(Location fountainLocation)
+        {
+            Location = fountainLocation;
+            IsEnabled = false;
+        }
 
-
-        // Methods
+        // Methods -
 
     }
 }

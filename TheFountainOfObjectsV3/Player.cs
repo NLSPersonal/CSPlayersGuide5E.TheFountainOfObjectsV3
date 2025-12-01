@@ -2,36 +2,46 @@
 {
     public class Player
     {
-        // Variables
+        // Variables - 
 
-        // Properties
-        public CaveRoom CurrentCaveRoom {  get; set; }
+        // Properties - 
+        public Location Location { get; set; }
 
-        // Constructors
-        public Player(Cave Cave)
+        // Constructors -
+        public Player()
         {
-            CurrentCaveRoom = Cave.CaveRoom[Cave.CaveEntrance.Row, Cave.CaveEntrance.Column];
+            Location = new Location(Cave.CaveEntrance);
         }
 
-        // Methods
-        public void Sense()
+        // Methods - 
+        public void Sense(Cave cave)
         {
-            if (CurrentCaveRoom.CaveRoomType == CaveRoomType.Entrance)
+            if (Location.Equals(Cave.CaveEntrance))
             {
                 Console.WriteLine("You see light coming from the cavern entrance.");
             }
 
-            if (CurrentCaveRoom.CaveRoomType == CaveRoomType.DisabledFountain)
+            if (Location.Equals(Cave.FountainLocation) && cave.CaveRoom[Cave.FountainLocation.Row, Cave.FountainLocation.Column].Fountain.IsEnabled == false)
             {
                 Console.WriteLine("You hear water dripping in this room. The Fountain of Objects is here!");
             }
-            if (CurrentCaveRoom.CaveRoomType == CaveRoomType.EnabledFountain)
+
+            if (Location.Equals(Cave.FountainLocation) && cave.CaveRoom[Cave.FountainLocation.Row, Cave.FountainLocation.Column].Fountain.IsEnabled)
             {
                 Console.WriteLine("You hear the rushing waters from the Fountain of Objects. It has been reactivated!");
             }
+
+            List<CaveRoomType> adjacentCaveRoomTypes = cave.CaveRoom[Location.Row, Location.Column].GetAdjacentCaveRoomTypes(cave);
+            foreach(CaveRoomType caveRoomType in adjacentCaveRoomTypes)
+            {
+                if (caveRoomType == CaveRoomType.Pit)
+                {
+                    Console.WriteLine("Careful! You sense a pit nearby!");
+                }
+            }
         }
 
-        public void Decide(Cave Cave)
+        public void Decide(Cave cave)
         {
             bool isValid = false;
             while (isValid == false)
@@ -40,27 +50,27 @@
                 switch (userRequestedAction.ToLower())
                 {
                     case "move north":
-                        Move("north", Cave);
+                        Move("north", cave);
                         isValid = true;
                         break;
 
                     case "move east":
-                        Move("east", Cave);
+                        Move("east", cave);
                         isValid = true;
                         break;
 
                     case "move south":
-                        Move("south", Cave);
+                        Move("south", cave);
                         isValid = true;
                         break;
 
                     case "move west":
-                        Move("west", Cave);
+                        Move("west", cave);
                         isValid = true;
                         break;
 
                     case "enable fountain":
-                        EnableFountain();
+                        EnableFountain(cave);
                         isValid = true;
                         break;
 
@@ -71,14 +81,15 @@
             }
         }
 
-        public void Move(string Move, Cave Cave)
+        // TO DO: Refactor to make player moves an enum.
+        public void Move(string move, Cave cave)
         {
-            switch (Move)
+            switch (move)
             {
                 case "north":
-                    if (CurrentCaveRoom.CaveRoomLocation.Row < Cave.AmountOfCaveColumns - 1)
+                    if (Location.Row < cave.AmountOfCaveRows - 1)
                     {
-                        CurrentCaveRoom = Cave.CaveRoom[CurrentCaveRoom.CaveRoomLocation.Row + 1, CurrentCaveRoom.CaveRoomLocation.Column];
+                        Location = Location with { Row = Location.Row + 1 };
                     }
                     else
                     {
@@ -88,9 +99,9 @@
 
 
                 case "east":
-                    if (CurrentCaveRoom.CaveRoomLocation.Column < Cave.AmountOfCaveRows - 1)
+                    if (Location.Column < cave.AmountOfCaveColumns - 1)
                     {
-                        CurrentCaveRoom = Cave.CaveRoom[CurrentCaveRoom.CaveRoomLocation.Row, CurrentCaveRoom.CaveRoomLocation.Column + 1];
+                        Location = Location with { Column = Location.Column + 1 };
                     }
                     else
                     {
@@ -99,9 +110,9 @@
                     break;
 
                 case "south":
-                    if (CurrentCaveRoom.CaveRoomLocation.Row > 0)
+                    if (Location.Row > 0)
                     {
-                        CurrentCaveRoom = Cave.CaveRoom[CurrentCaveRoom.CaveRoomLocation.Row - 1, CurrentCaveRoom.CaveRoomLocation.Column];
+                        Location = Location with { Row = Location.Row - 1 };
                     }
                     else
                     {
@@ -110,9 +121,9 @@
                     break;
 
                 case "west":
-                    if (CurrentCaveRoom.CaveRoomLocation.Column > 0)
+                    if (Location.Column > 0)
                     {
-                        CurrentCaveRoom = Cave.CaveRoom[CurrentCaveRoom.CaveRoomLocation.Row, CurrentCaveRoom.CaveRoomLocation.Column - 1];
+                        Location = Location with { Column = Location.Column - 1 };
                     }
                     else
                     {
@@ -122,12 +133,11 @@
             }
         }
 
-        public void EnableFountain()
+        public void EnableFountain(Cave cave)
         {
-            if (CurrentCaveRoom.Fountain != null)
+            if (Location.Equals(Cave.FountainLocation))
             {
-                CurrentCaveRoom.Fountain.IsEnabled = true;
-                CurrentCaveRoom.CaveRoomType = CaveRoomType.EnabledFountain;
+                cave.CaveRoom[Cave.FountainLocation.Row, Cave.FountainLocation.Column].Fountain.IsEnabled = true;
             }
             else
             {

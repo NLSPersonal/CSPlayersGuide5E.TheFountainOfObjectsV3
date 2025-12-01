@@ -1,10 +1,12 @@
-﻿namespace TheFountainOfObjectsV3
+﻿using System.Collections.Generic;
+
+namespace TheFountainOfObjectsV3
 {
     public class Cave
     {
-        // Variables
+        // Variables -
 
-        // Properties
+        // Properties -
         public int AmountOfCaveRows { get; }
 
         public int AmountOfCaveColumns { get; }
@@ -15,74 +17,80 @@
 
         public CaveSize Size { get; }
 
-        public (int Row, int Column) CaveEntrance { get; }
+        public static Location CaveEntrance { get; set; }
 
-        public (int Row, int Column) FountainLocation { get; }
+        public static Location FountainLocation { get; set; }
 
-        // Constructors
-        public Cave(CaveSize CaveSize)
+        public static List<Location> PitLocations { get; set; }
+
+        // Constructors - 
+        public Cave(CaveSize caveSize)
         {
-            if (CaveSize == CaveSize.Small)
+            if (caveSize == CaveSize.Small)
             {
                 Size = CaveSize.Small;
                 AmountOfCaveRows = 4;
                 AmountOfCaveColumns = 4;
                 AmountOfCaveRooms = AmountOfCaveRows * AmountOfCaveColumns;
                 CaveRoom = new CaveRoom[AmountOfCaveRows, AmountOfCaveColumns];
-                CaveEntrance = (0, 0);
-                FountainLocation = (0, 1);
+                CaveEntrance = new Location(0,0);
+                FountainLocation = new Location(0, 2);
+                PitLocations = new List<Location> { new Location(2, 1)};
 
+                // TO DO: Refactor to remove arrayCounter if not needed
                 int arrayCounter = 0;
                 for (int columnCounter = 0; columnCounter < AmountOfCaveColumns; columnCounter++)
                 {
                     for (int rowCounter = 0; rowCounter < AmountOfCaveRows; rowCounter++, arrayCounter++)
                     {
-                        CaveRoom[rowCounter, columnCounter] = new CaveRoom(rowCounter, columnCounter, CaveEntrance, FountainLocation);
+                        CaveRoom[rowCounter, columnCounter] = new CaveRoom(rowCounter, columnCounter);
                     }
                 }
             }
 
-            if (CaveSize == CaveSize.Medium)
+            if (caveSize == CaveSize.Medium)
             {
                 Size = CaveSize.Medium;
                 AmountOfCaveRows = 6;
                 AmountOfCaveColumns = 6;
                 AmountOfCaveRooms = AmountOfCaveRows * AmountOfCaveColumns;
                 CaveRoom = new CaveRoom[AmountOfCaveRows, AmountOfCaveColumns];
-                CaveEntrance = (0, 0);
-                FountainLocation = (0, 2);
+                CaveEntrance = new Location(0, 0);
+                FountainLocation = new Location(0, 2);
+                PitLocations = new List<Location> { new Location(2, 2) };
 
                 int arrayCounter = 0;
                 for (int columnCounter = 0; columnCounter < AmountOfCaveColumns; columnCounter++)
                 {
                     for (int rowCounter = 0; rowCounter < AmountOfCaveRows; rowCounter++, arrayCounter++)
                     {
-                        CaveRoom[rowCounter, columnCounter] = new CaveRoom(rowCounter, columnCounter, CaveEntrance, FountainLocation);
+                        CaveRoom[rowCounter, columnCounter] = new CaveRoom(rowCounter, columnCounter);
                     }
                 }
             }
 
-            if (CaveSize == CaveSize.Large)
+            if (caveSize == CaveSize.Large)
             {
                 Size = CaveSize.Large;
                 AmountOfCaveRows = 8;
                 AmountOfCaveColumns = 8;
                 AmountOfCaveRooms = AmountOfCaveRows * AmountOfCaveColumns;
                 CaveRoom = new CaveRoom[AmountOfCaveRows, AmountOfCaveColumns];
-                CaveEntrance = (0, 0);
-                FountainLocation = (0, 3);
+                CaveEntrance = new Location(0, 0);
+                FountainLocation = new Location(0, 3);
+                PitLocations = new List<Location> { new Location(2, 1) };
 
                 int arrayCounter = 0;
                 for (int columnCounter = 0; columnCounter < AmountOfCaveColumns; columnCounter++)
                 {
                     for (int rowCounter = 0; rowCounter < AmountOfCaveRows; rowCounter++, arrayCounter++)
                     {
-                        CaveRoom[rowCounter, columnCounter] = new CaveRoom(rowCounter, columnCounter, CaveEntrance, FountainLocation);
+                        CaveRoom[rowCounter, columnCounter] = new CaveRoom(rowCounter, columnCounter);
                     }
                 }
             }
         }
 
-        // Methods
+        // Methods - 
     }
 }

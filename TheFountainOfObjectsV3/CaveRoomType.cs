@@ -1,10 +1,10 @@
 ﻿namespace TheFountainOfObjectsV3
 {
+    // Enums -
     public enum CaveRoomType
     {
         Normal,
-        DisabledFountain,
-        EnabledFountain,
-        Entrance
+        Entrance,
+        Pit,
     }
 }
