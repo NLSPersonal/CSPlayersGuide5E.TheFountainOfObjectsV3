@@ -1,4 +1,4 @@
-﻿//Main - The entry point of the program. In this main method an instance of the game class is created. That instance's DisplayRules, ChooseCaveSize and Run methods are then executed. 
+﻿// Main - The entry point of the application that initializes and runs the game. 
 
 using TheFountainOfObjectsV3;
 

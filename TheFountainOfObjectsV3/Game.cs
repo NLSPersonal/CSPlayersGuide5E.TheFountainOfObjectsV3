@@ -2,9 +2,9 @@
 {
     public class Game
     {
-        // Variables
+        // VARIABLES - 
 
-        // Properties
+        // PROPERTIES - 
         public Player Player1 { get; set; }
 
         public Cave Cave { get; set; }
@@ -13,9 +13,9 @@
 
         public bool GameHasBeenLost { get; set; }
 
-        // Constructors
+        // CONSTRUCTORS - 
 
-        // Methods
+        // METHODS - 
         public void DisplaysRules()
         {
             //Console.ForegroundColor = ConsoleColor.Green;
@@ -42,24 +42,26 @@
             bool isValid = false;
             while (isValid == false)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 string userRequestedCaveSize = Console.ReadLine();
+                Console.ResetColor();
                 switch (userRequestedCaveSize.ToLower())
                 {
                     case "small":
                         Cave = new Cave(CaveSize.Small);
-                        Player1 = new Player(Cave);
+                        Player1 = new Player();
                         isValid = true;
                         break;
 
                     case "medium":
                         Cave = new Cave(CaveSize.Medium);
-                        Player1 = new Player(Cave);
+                        Player1 = new Player();
                         isValid = true;
                         break;
 
                     case "large":
                         Cave = new Cave(CaveSize.Large);
-                        Player1 = new Player(Cave);
+                        Player1 = new Player();
                         isValid = true;
                         break;
 
@@ -72,27 +74,38 @@
 
         public void Run()
         {
-            while (GameHasBeenWon == false)
+            while (GameHasBeenWon == false && GameHasBeenLost == false)
             {
                 Console.WriteLine("\n----------------------------------------");
-                Console.WriteLine($"You are in the room at (Row:{Player1.CurrentCaveRoom.CaveRoomLocation.Row}, Column:{Player1.CurrentCaveRoom.CaveRoomLocation.Column})");
-                Player1.Sense();
+                Console.WriteLine($"You are in the room at (Row:{Player1.Location.Row}, Column:{Player1.Location.Column})");
+                Player1.Sense(Cave);
                 Console.WriteLine("What do you want to do?");
                 Player1.Decide(Cave);
                 CheckIfGameHasBeenWon(Cave, Player1);
+                CheckIfGameHasBeenLost(Cave, Player1);
             }
         }
 
-        public void CheckIfGameHasBeenWon(Cave Cave, Player Player)
+        public void CheckIfGameHasBeenWon(Cave cave, Player player)
         {
-            if ((Cave.CaveRoom[Cave.FountainLocation.Row, Cave.FountainLocation.Column].Fountain.IsEnabled == true) && (Player.CurrentCaveRoom == Cave.CaveRoom[Cave.CaveEntrance.Row, Cave.CaveEntrance.Column]))
+            if (cave.CaveRoom[Cave.FountainLocation.Row, Cave.FountainLocation.Column].Fountain.IsEnabled && (player.Location.Equals(Cave.CaveEntrance)))
             {
                 Console.WriteLine("\n----------------------------------------");
-                Console.WriteLine($"You are in the room at (Row:{Player1.CurrentCaveRoom.CaveRoomLocation.Row}, Column:{Player1.CurrentCaveRoom.CaveRoomLocation.Column})");
+                Console.WriteLine($"You are in the room at (Row:{Player1.Location.Row}, Column:{Player1.Location.Column})");
                 Console.WriteLine("The Fountain of Objects has been reactivated, and you have escaped with your life!");
                 GameHasBeenWon = true;
             }
         }
+
+        public void CheckIfGameHasBeenLost(Cave cave, Player player)
+        {
+            if (cave.CaveRoom[player.Location.Row, player.Location.Column].CaveRoomType == CaveRoomType.Pit)
+            {
+                Console.WriteLine("\n----------------------------------------");
+                Console.WriteLine($"You are in the room at (Row:{Player1.Location.Row}, Column:{Player1.Location.Column})");
+                Console.WriteLine("You feel the ground below your feet, and then suddenly you don't. You tumble down the pit. You are never seen again. Game over!");
+                GameHasBeenLost = true;
+            }
+        }
     }
 }
-
