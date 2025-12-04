@@ -2,16 +2,18 @@
 {
     public class CaveRoom
     {
-        // Variables -
+        // VARIABLES -
 
-        // Properties -
+        // PROPERTIES -
         public Location Location { get; set; }
 
         public CaveRoomType CaveRoomType { get; set; }
 
         public Fountain? Fountain { get; set; }
 
-        // Constructors -
+        public Maelstrom? Maelstrom { get; set; }
+
+        // CONSTRUCTORS -
         // TO DO: Rename row and column
         public CaveRoom(int row, int column)
         {
@@ -28,26 +30,26 @@
                 Fountain = new Fountain(Cave.FountainLocation);
             }
 
-            foreach (Location pit in Cave.PitLocations)
+            foreach (Location pitLocation in Cave.PitLocations)
             {
-                if (Location.Equals(pit))
+                if (Location.Equals(pitLocation))
                 {
                     CaveRoomType = CaveRoomType.Pit;
                     break;
                 }
             }
 
-            foreach (Location maelstrom in Cave.MaelstromLocations)
+            foreach (Location maelstromLocation in Cave.MaelstromLocations)
             {
-                if (Location.Equals(maelstrom))
+                if (Location.Equals(maelstromLocation))
                 {
-                    CaveRoomType = CaveRoomType.Maelstrom;
+                    Maelstrom = new Maelstrom(maelstromLocation);
                     break;
                 }
             }
         }
 
-        // Methods -
+        // METHODS -
         public List<CaveRoomType> GetAdjacentCaveRoomTypes(Cave cave)
         {
             List<CaveRoomType> adjacentCaveRoomTypes = new List<CaveRoomType>() { };
@@ -70,8 +72,32 @@
                     }
                 }
             }
-
             return adjacentCaveRoomTypes;
+        }
+
+        public bool CheckAdjacentCaveRoomsForMaelstroms(Cave cave)
+        {
+            for (int deltaRow = -1; deltaRow <= 1; deltaRow++)
+            {
+                for (int deltaColumn = -1; deltaColumn <= 1; deltaColumn++)
+                {
+                    if (deltaRow == 0 && deltaColumn == 0)
+                    {
+                        continue;
+                    }
+                    int adjacentRow = Location.Row + deltaRow;
+                    int adjacentColumn = Location.Column + deltaColumn;
+                    if (adjacentRow >= 0 && adjacentRow < cave.AmountOfCaveRows && adjacentColumn >= 0 && adjacentColumn < cave.AmountOfCaveColumns)
+                    {
+                        CaveRoom adjacentCaveRoom = cave.CaveRoom[adjacentRow, adjacentColumn];
+                        if (adjacentCaveRoom.Maelstrom != null)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
         }
     }
 }

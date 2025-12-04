@@ -2,18 +2,18 @@
 {
     public class Player
     {
-        // Variables - 
+        // VARIABLES - 
 
-        // Properties - 
+        // PROPERTIES - 
         public Location Location { get; set; }
 
-        // Constructors -
+        // CONSTRUCTORS -
         public Player()
         {
             Location = new Location(Cave.CaveEntrance);
         }
 
-        // Methods - 
+        // METHODS - 
         public void Sense(Cave cave)
         {
             if (Location.Equals(Cave.CaveEntrance))
@@ -32,17 +32,18 @@
             }
 
             List<CaveRoomType> adjacentCaveRoomTypes = cave.CaveRoom[Location.Row, Location.Column].GetAdjacentCaveRoomTypes(cave);
-            foreach(CaveRoomType caveRoomType in adjacentCaveRoomTypes)
+            foreach (CaveRoomType caveRoomType in adjacentCaveRoomTypes)
             {
                 if (caveRoomType == CaveRoomType.Pit)
                 {
                     Console.WriteLine("Careful! You sense a pit nearby!");
+                    break;
                 }
+            }
 
-                if (caveRoomType == CaveRoomType.Maelstrom)
-                {
-                    Console.WriteLine("You hear the growling and groaning of a maelstrom nearby!");
-                }
+            if (cave.CaveRoom[Location.Row, Location.Column].CheckAdjacentCaveRoomsForMaelstroms(cave))
+            {
+                Console.WriteLine("You hear a low rumbling noise. A Maelstrom is close!");
             }
         }
 
@@ -138,6 +139,8 @@
                     }
                     break;
             }
+            // After moving, check if player has been transported by maelstrom.
+            cave.CaveRoom[Location.Row, Location.Column].Maelstrom?.CheckIfPlayerHasBeenTransportedByMaelstrom(cave, this);
         }
 
         public void EnableFountain(Cave cave)

@@ -2,9 +2,9 @@
 {
     public class Cave
     {
-        // Variables -
+        // VARIABLES -
 
-        // Properties -
+        // PROPERTIES -
         public int AmountOfCaveRows { get; }
 
         public int AmountOfCaveColumns { get; }
@@ -19,11 +19,11 @@
 
         public static Location FountainLocation { get; set; }
 
-        public static List<Location> PitLocations { get; set; }
+        public static List<Location>? PitLocations { get; set; }
 
-        public static List<Location> MaelstromLocations { get; set; }
+        public static List<Location>? MaelstromLocations { get; set; }
 
-        // Constructors - 
+        // CONSTRUCTORS - 
         public Cave(CaveSize caveSize)
         {
             if (caveSize == CaveSize.Small)
@@ -38,11 +38,9 @@
                 PitLocations = new List<Location> { new Location(2, 1)};
                 MaelstromLocations = new List<Location> { new Location(1, 2) };
 
-                // TO DO: Refactor to remove arrayCounter if not needed
-                int arrayCounter = 0;
                 for (int columnCounter = 0; columnCounter < AmountOfCaveColumns; columnCounter++)
                 {
-                    for (int rowCounter = 0; rowCounter < AmountOfCaveRows; rowCounter++, arrayCounter++)
+                    for (int rowCounter = 0; rowCounter < AmountOfCaveRows; rowCounter++)
                     {
                         CaveRoom[rowCounter, columnCounter] = new CaveRoom(rowCounter, columnCounter);
                     }
@@ -61,10 +59,9 @@
                 PitLocations = new List<Location> { new Location(2, 2) };
                 MaelstromLocations = new List<Location> { new Location(1, 1), new Location(0, 5), new Location(1, 0)};
 
-                int arrayCounter = 0;
                 for (int columnCounter = 0; columnCounter < AmountOfCaveColumns; columnCounter++)
                 {
-                    for (int rowCounter = 0; rowCounter < AmountOfCaveRows; rowCounter++, arrayCounter++)
+                    for (int rowCounter = 0; rowCounter < AmountOfCaveRows; rowCounter++)
                     {
                         CaveRoom[rowCounter, columnCounter] = new CaveRoom(rowCounter, columnCounter);
                     }
@@ -83,10 +80,9 @@
                 PitLocations = new List<Location> { new Location(2, 1) };
                 MaelstromLocations = new List<Location> { new Location(1, 2) };
 
-                int arrayCounter = 0;
                 for (int columnCounter = 0; columnCounter < AmountOfCaveColumns; columnCounter++)
                 {
-                    for (int rowCounter = 0; rowCounter < AmountOfCaveRows; rowCounter++, arrayCounter++)
+                    for (int rowCounter = 0; rowCounter < AmountOfCaveRows; rowCounter++)
                     {
                         CaveRoom[rowCounter, columnCounter] = new CaveRoom(rowCounter, columnCounter);
                     }
@@ -94,7 +90,7 @@
             }
         }
 
-        // Methods - 
+        // METHODS - 
 
     }
 }
