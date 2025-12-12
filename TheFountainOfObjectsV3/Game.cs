@@ -99,6 +99,11 @@
 
         public void CheckIfGameHasBeenLost(Cave cave, Player player)
         {
+            if (player.IsAlive == false)
+            {
+                GameHasBeenLost = true;
+            }
+
             if (cave.CaveRoom[player.Location.Row, player.Location.Column].CaveRoomType == CaveRoomType.Pit)
             {
                 Console.WriteLine("\n----------------------------------------");

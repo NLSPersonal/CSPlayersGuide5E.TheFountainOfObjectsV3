@@ -7,6 +7,8 @@
         // PROPERTIES - 
         public Location Location { get; set; }
 
+        public bool IsAlive { get; set; } = true;
+
         // CONSTRUCTORS -
         public Player()
         {
@@ -36,7 +38,7 @@
             {
                 if (caveRoomType == CaveRoomType.Pit)
                 {
-                    Console.WriteLine("Careful! You sense a pit nearby!");
+                    Console.WriteLine("You feel a draft of air push into the room. A pit is nearby!");
                     break;
                 }
             }
@@ -44,6 +46,11 @@
             if (cave.CaveRoom[Location.Row, Location.Column].CheckAdjacentCaveRoomsForMaelstroms(cave))
             {
                 Console.WriteLine("You hear a low rumbling noise. A Maelstrom is close!");
+            }
+
+            if (cave.CaveRoom[Location.Row, Location.Column].CheckAdjacentCaveRoomsForAmaroks(cave))
+            {
+                Console.WriteLine("You smell rot and decay. An Amarok is close!");
             }
         }
 
@@ -140,7 +147,15 @@
                     break;
             }
             // After moving, check if player has been transported by maelstrom.
-            cave.CaveRoom[Location.Row, Location.Column].Maelstrom?.CheckIfPlayerHasBeenTransportedByMaelstrom(cave, this);
+            while (cave.CaveRoom[Location.Row, Location.Column].Maelstrom?.CheckIfAffectsPlayer(cave, this) == true)
+            {
+                cave.CaveRoom[Location.Row, Location.Column].Maelstrom.TeleportPlayer(cave, this);
+            }
+
+            if (cave.CaveRoom[Location.Row, Location.Column].Amarok?.CheckIfAffectsPlayer(cave, this) == true)
+            {
+                cave.CaveRoom[Location.Row, Location.Column].Amarok.KillPlayer(cave, this);
+            }
         }
 
         public void EnableFountain(Cave cave)
