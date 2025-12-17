@@ -9,6 +9,10 @@
 
         public bool IsAlive { get; set; } = true;
 
+        public Bow Bow { get; set; } = new Bow();
+
+        public Quiver Quiver { get; set; } = new Quiver(5);
+
         // CONSTRUCTORS -
         public Player()
         {
@@ -89,8 +93,34 @@
                         isValid = true;
                         break;
 
+                    // TO DO: Consider putting cardinal directions in an enum to reduce code duplication.
+                    case "shoot north":
+                        Bow.Shoot(this, Quiver, "north", cave);
+                        isValid = true;
+                        break;
+
+                    case "shoot east":
+                        Bow.Shoot(this, Quiver, "east", cave);
+                        isValid = true;
+                        break;
+
+                    case "shoot south":
+                        Bow.Shoot(this, Quiver, "south", cave);
+                        isValid = true;
+                        break;
+
+                    case "shoot west":
+                        Bow.Shoot(this, Quiver, "west", cave);
+                        isValid = true;
+                        break;
+
+                    case "help":
+                        Game.DisplayHelp();
+                        isValid = true;
+                        break;
+
                     default:
-                        Console.WriteLine("This is not a valid action. Please try again.");
+                        Console.WriteLine("This is not a valid action. Please try again.\n");
                         break;
                 }
             }

@@ -57,11 +57,11 @@
                 AmountOfCaveColumns = 6;
                 AmountOfCaveRooms = AmountOfCaveRows * AmountOfCaveColumns;
                 CaveRoom = new CaveRoom[AmountOfCaveRows, AmountOfCaveColumns];
-                CaveEntrance = new Location(0, 0);
-                FountainLocation = new Location(0, 2);
-                PitLocations = new List<Location> { new Location(2, 2) };
-                MaelstromLocations = new List<Location> { new Location(1, 1), new Location(0, 5), new Location(1, 0)};
-                AmarokLocations = new List<Location> { new Location(5, 5) };
+                CaveEntrance = new Location(0, 2);
+                FountainLocation = new Location(3, 4);
+                PitLocations = new List<Location> { new Location(3, 2), new Location(0, 5)};
+                MaelstromLocations = new List<Location> { new Location(1, 4)};
+                AmarokLocations = new List<Location> { new Location(4, 1), new Location(4, 4)};
 
                 for (int columnCounter = 0; columnCounter < AmountOfCaveColumns; columnCounter++)
                 {

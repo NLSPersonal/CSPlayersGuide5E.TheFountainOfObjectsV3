@@ -87,6 +87,7 @@
         }
 
         // TO DO: Combine CheckAdjacentCaveRoomsForMaelstroms and CheckAdjacentCaveRoomsForAmaroks into one method that takes a CreatureType parameter.
+        // TO DO: Consider moving to Player class.
         public bool CheckAdjacentCaveRoomsForMaelstroms(Cave cave)
         {
             for (int deltaRow = -1; deltaRow <= 1; deltaRow++)

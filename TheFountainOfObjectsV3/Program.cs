@@ -4,5 +4,6 @@ using TheFountainOfObjectsV3;
 
 Game gameInstance = new Game();
 gameInstance.DisplaysRules();
+Game.DisplayHelp();
 gameInstance.ChooseCaveSize();
 gameInstance.Run();

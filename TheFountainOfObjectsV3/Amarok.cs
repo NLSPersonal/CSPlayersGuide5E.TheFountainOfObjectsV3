@@ -19,9 +19,11 @@ namespace TheFountainOfObjectsV3
         // METHODS -
         public void KillPlayer(Cave cave, Player player)
         {
-            Console.WriteLine("\n----------------------------------------");
+            Console.WriteLine("----------------------------------------");
             Console.WriteLine($"You are in the room at (Row:{player.Location.Row}, Column:{player.Location.Column})");
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("An Amarok has attacked you! You were unable to best it. You are never seen again.");
+            Console.ResetColor();
             player.IsAlive = false;
         }
     }
