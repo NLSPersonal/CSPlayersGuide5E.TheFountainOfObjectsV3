@@ -21,6 +21,7 @@ namespace TheFountainOfObjectsV3
         {
             Console.WriteLine("----------------------------------------");
             Console.WriteLine($"You are in the room at (Row:{player.Location.Row}, Column:{player.Location.Column})");
+            Console.WriteLine($"You have {player.Quiver.ArrowCount} arrows left in your quiver.");
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("An Amarok has attacked you! You were unable to best it. You are never seen again.");
             Console.ResetColor();

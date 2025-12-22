@@ -1,4 +1,6 @@
-﻿namespace TheFountainOfObjectsV3
+﻿using System.Numerics;
+
+namespace TheFountainOfObjectsV3
 {
     public class Game
     {
@@ -90,6 +92,7 @@
             {
                 Console.WriteLine("----------------------------------------");
                 Console.WriteLine($"You are in the room at (Row:{Player1.Location.Row}, Column:{Player1.Location.Column})");
+                Console.WriteLine($"You have {Player1.Quiver.ArrowCount} arrows left in your quiver.");
                 Player1.Sense(Cave);
                 Console.WriteLine("What do you want to do?\n");
                 Player1.Decide(Cave);
@@ -106,6 +109,7 @@
             {
                 Console.WriteLine("----------------------------------------");
                 Console.WriteLine($"You are in the room at (Row:{Player1.Location.Row}, Column:{Player1.Location.Column})");
+                Console.WriteLine($"You have {player.Quiver.ArrowCount} arrows left in your quiver.");
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("The Fountain of Objects has been reactivated, and you have escaped with your life!");
                 Console.ResetColor();
@@ -124,6 +128,7 @@
             {
                 Console.WriteLine("----------------------------------------");
                 Console.WriteLine($"You are in the room at (Row:{Player1.Location.Row}, Column:{Player1.Location.Column})");
+                Console.WriteLine($"You have {player.Quiver.ArrowCount} arrows left in your quiver.");
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("You feel the ground below your feet, and then suddenly you don't. You tumble down the pit. You are never seen again. Game over!");
                 Console.ResetColor();

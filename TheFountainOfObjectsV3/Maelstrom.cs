@@ -22,6 +22,7 @@ namespace TheFountainOfObjectsV3
         {
                 Console.WriteLine("----------------------------------------");
                 Console.WriteLine($"You are in the room at (Row:{player.Location.Row}, Column:{player.Location.Column})");
+            Console.WriteLine($"You have {player.Quiver.ArrowCount} arrows left in your quiver.");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("A maelstrom has caught you! You are being transported to another location in the cave!");
                 int newPlayerLocationRow = (player.Location.Row + 1 + cave.AmountOfCaveRows) % cave.AmountOfCaveRows;
