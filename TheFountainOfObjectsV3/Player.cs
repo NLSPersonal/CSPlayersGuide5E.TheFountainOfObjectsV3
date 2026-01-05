@@ -7,6 +7,12 @@
         // PROPERTIES - 
         public Location Location { get; set; }
 
+        public bool IsAlive { get; set; } = true;
+
+        public Bow Bow { get; set; } = new Bow();
+
+        public Quiver Quiver { get; set; } = new Quiver(5);
+
         // CONSTRUCTORS -
         public Player()
         {
@@ -36,7 +42,7 @@
             {
                 if (caveRoomType == CaveRoomType.Pit)
                 {
-                    Console.WriteLine("Careful! You sense a pit nearby!");
+                    Console.WriteLine("You feel a draft of air push into the room. A pit is nearby!");
                     break;
                 }
             }
@@ -44,6 +50,11 @@
             if (cave.CaveRoom[Location.Row, Location.Column].CheckAdjacentCaveRoomsForMaelstroms(cave))
             {
                 Console.WriteLine("You hear a low rumbling noise. A Maelstrom is close!");
+            }
+
+            if (cave.CaveRoom[Location.Row, Location.Column].CheckAdjacentCaveRoomsForAmaroks(cave))
+            {
+                Console.WriteLine("You smell rot and decay. An Amarok is close!");
             }
         }
 
@@ -82,8 +93,34 @@
                         isValid = true;
                         break;
 
+                    // TO DO: Consider putting cardinal directions in an enum to reduce code duplication.
+                    case "shoot north":
+                        Bow.Shoot(this, Quiver, "north", cave);
+                        isValid = true;
+                        break;
+
+                    case "shoot east":
+                        Bow.Shoot(this, Quiver, "east", cave);
+                        isValid = true;
+                        break;
+
+                    case "shoot south":
+                        Bow.Shoot(this, Quiver, "south", cave);
+                        isValid = true;
+                        break;
+
+                    case "shoot west":
+                        Bow.Shoot(this, Quiver, "west", cave);
+                        isValid = true;
+                        break;
+
+                    case "help":
+                        Game.DisplayHelp();
+                        isValid = true;
+                        break;
+
                     default:
-                        Console.WriteLine("This is not a valid action. Please try again.");
+                        Console.WriteLine("This is not a valid action. Please try again.\n");
                         break;
                 }
             }
@@ -140,7 +177,15 @@
                     break;
             }
             // After moving, check if player has been transported by maelstrom.
-            cave.CaveRoom[Location.Row, Location.Column].Maelstrom?.CheckIfPlayerHasBeenTransportedByMaelstrom(cave, this);
+            while (cave.CaveRoom[Location.Row, Location.Column].Maelstrom?.CheckIfAffectsPlayer(cave, this) == true)
+            {
+                cave.CaveRoom[Location.Row, Location.Column].Maelstrom.TeleportPlayer(cave, this);
+            }
+
+            if (cave.CaveRoom[Location.Row, Location.Column].Amarok?.CheckIfAffectsPlayer(cave, this) == true)
+            {
+                cave.CaveRoom[Location.Row, Location.Column].Amarok.KillPlayer(cave, this);
+            }
         }
 
         public void EnableFountain(Cave cave)
