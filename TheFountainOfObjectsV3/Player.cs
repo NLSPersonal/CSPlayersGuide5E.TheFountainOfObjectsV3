@@ -182,6 +182,7 @@
                 cave.CaveRoom[Location.Row, Location.Column].Maelstrom.TeleportPlayer(cave, this);
             }
 
+            // After moving, check if player has been killed by amarok.
             if (cave.CaveRoom[Location.Row, Location.Column].Amarok?.CheckIfAffectsPlayer(cave, this) == true)
             {
                 cave.CaveRoom[Location.Row, Location.Column].Amarok.KillPlayer(cave, this);
