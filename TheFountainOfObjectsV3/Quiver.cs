@@ -8,14 +8,13 @@ namespace TheFountainOfObjectsV3
 {
     public class Quiver
     {
-        // VARIABLES - 
-        // PROPERTIES - 
+        // PROPERTIES
         public int ArrowCount { get; set; }
-        // CONSTRUCTORS -
+
+        // CONSTRUCTORS
         public Quiver(int initialArrowCount)
         {
             ArrowCount = initialArrowCount;
         }
-        // METHODS -
     }
 }

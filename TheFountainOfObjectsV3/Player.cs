@@ -2,9 +2,7 @@
 {
     public class Player
     {
-        // VARIABLES - 
-
-        // PROPERTIES - 
+        // PROPERTIES
         public Location Location { get; set; }
 
         public bool IsAlive { get; set; } = true;
@@ -13,13 +11,14 @@
 
         public Quiver Quiver { get; set; } = new Quiver(5);
 
-        // CONSTRUCTORS -
+        // CONSTRUCTORS
         public Player()
         {
             Location = new Location(Cave.CaveEntrance);
         }
 
-        // METHODS - 
+        // METHODS
+        // Player senses their environment to get clues as to what is around them.
         public void Sense(Cave cave)
         {
             if (Location.Equals(Cave.CaveEntrance))
@@ -58,6 +57,8 @@
             }
         }
 
+        // TO DO: Consider making player movements an enum.
+        // Player decides what action they want to take by using available commands.
         public void Decide(Cave cave)
         {
             bool isValid = false;
@@ -127,6 +128,7 @@
         }
 
         // TO DO: Refactor to make player moves an enum.
+        // Player is moved based on what movement they chose from the available commands.
         public void Move(string move, Cave cave)
         {
             switch (move)
@@ -189,6 +191,7 @@
             }
         }
 
+        // Player enables the fountain if the fountain is in their current room.
         public void EnableFountain(Cave cave)
         {
             if (Location.Equals(Cave.FountainLocation))

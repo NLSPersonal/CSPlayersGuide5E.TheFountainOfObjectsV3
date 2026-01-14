@@ -4,9 +4,7 @@ namespace TheFountainOfObjectsV3
 {
     public class Game
     {
-        // VARIABLES - 
-
-        // PROPERTIES - 
+        // PROPERTIES
         public Player Player1 { get; set; }
 
         public Cave Cave { get; set; }
@@ -15,9 +13,8 @@ namespace TheFountainOfObjectsV3
 
         public bool GameHasBeenLost { get; set; }
 
-        // CONSTRUCTORS - 
-
-        // METHODS - 
+        // METHODS
+        // Displays the game rules.
         public void DisplaysRules()
         {
             //Console.ForegroundColor = ConsoleColor.Green;
@@ -46,6 +43,7 @@ namespace TheFountainOfObjectsV3
             Console.WriteLine(gameRules);
         }
 
+        // Lets the user set the cave size.
         public void ChooseCaveSize()
         {
             Console.WriteLine("First, what size game would you like to play?\n\n" +
@@ -86,6 +84,7 @@ namespace TheFountainOfObjectsV3
             }
         }
 
+        // Runs the game loop.
         public void Run()
         {
             while (GameHasBeenWon == false && GameHasBeenLost == false)
@@ -103,6 +102,7 @@ namespace TheFountainOfObjectsV3
 
         // TO DO: Consider making a helper class to write console lines in a particular color to reduce code duplication.
         // TO DO: Consider making a helper class to display player location to reduce code duplication.
+        // Checks if the game win condition has been met.
         public void CheckIfGameHasBeenWon(Cave cave, Player player)
         {
             if (cave.CaveRoom[Cave.FountainLocation.Row, Cave.FountainLocation.Column].Fountain.IsEnabled && (player.Location.Equals(Cave.CaveEntrance)))
@@ -117,6 +117,7 @@ namespace TheFountainOfObjectsV3
             }
         }
 
+        // Checks if the games loss condition have been met.
         public void CheckIfGameHasBeenLost(Cave cave, Player player)
         {
             if (player.IsAlive == false)
@@ -136,6 +137,7 @@ namespace TheFountainOfObjectsV3
             }
         }
 
+        // Displays the available commands to the user.
         public static void DisplayHelp() 
         {
             string commands = "The available commands are:\n\n" +

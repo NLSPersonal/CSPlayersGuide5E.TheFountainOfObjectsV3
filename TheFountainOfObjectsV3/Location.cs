@@ -2,8 +2,6 @@
 {
     public readonly record struct Location
     {
-        // VARIABLES
-
         // PROPERTIES
         public int Row { get; init; }
         public int Column { get; init; }
@@ -20,8 +18,5 @@
             Row = location.Row;
             Column = location.Column;
         }
-
-        // METHODS
-
     }
 }

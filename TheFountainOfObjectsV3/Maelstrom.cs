@@ -8,15 +8,13 @@ namespace TheFountainOfObjectsV3
 {
     public class Maelstrom : Creature
     {
-        // VARIABLES - 
-        // PROPERTIES - 
-
-        // CONSTRUCTORS - 
+        // CONSTRUCTORS
         public Maelstrom(Location maelstromLocation)
         {
             Location = maelstromLocation;
         }
-        // METHODS -
+
+        // METHODS
         // Check if player has been transported by maelstrom. If so, move player one space to the north and two spaces east, wrapping around the cave as needed.
         public void TeleportPlayer(Cave cave, Player player)
         {

@@ -8,13 +8,11 @@ namespace TheFountainOfObjectsV3
 {
     public class Creature
     {
-        // VARIABLES -
-        // PROPERTIES -
+        // PROPERTIES
         protected Location Location { get; set; }
 
-        // CONSTRUCTORS -
-
-        // METHODS -
+        // METHODS
+        // Check if the creature affects the player based on if they have the same location.
         public bool CheckIfAffectsPlayer(Cave cave, Player player)
         {
             if (player.Location.Equals(Location))

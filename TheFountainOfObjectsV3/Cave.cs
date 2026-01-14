@@ -2,9 +2,7 @@
 {
     public class Cave
     {
-        // VARIABLES -
-
-        // PROPERTIES -
+        // PROPERTIES
         public int AmountOfCaveRows { get; }
 
         public int AmountOfCaveColumns { get; }
@@ -25,7 +23,7 @@
 
         public static List<Location>? AmarokLocations { get; set; }
 
-        // CONSTRUCTORS - 
+        // CONSTRUCTORS
         public Cave(CaveSize caveSize)
         {
             if (caveSize == CaveSize.Small)
@@ -94,8 +92,5 @@
                 }
             }
         }
-
-        // METHODS - 
-
     }
 }

@@ -8,10 +8,8 @@ namespace TheFountainOfObjectsV3
 {
     public class Bow
     {
-        // VARIABLES - 
-        // PROPERTIES - 
-        // CONSTRUCTORS -
-        // METHODS -
+        // METHODS
+        // Bow shoots an arrow in a direction based on what the player chose from the available commands.
         public void Shoot(Player player, Quiver playerQuiver, string targetDirection, Cave cave)
         {
             Location targetLocation = default;

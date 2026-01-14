@@ -8,15 +8,14 @@ namespace TheFountainOfObjectsV3
 {
     public class Amarok : Creature
     {
-        // VARIABLES -
-        
-        // PROPERTIES -
-        // CONSTRUCTORS -
+        // CONSTRUCTORS
         public Amarok(Location amarokLocation)
         {
             Location = amarokLocation;
         }
-        // METHODS -
+
+        // METHODS
+        // Amarok kills the player if they enter it's cave room.
         public void KillPlayer(Cave cave, Player player)
         {
             Console.WriteLine("----------------------------------------");

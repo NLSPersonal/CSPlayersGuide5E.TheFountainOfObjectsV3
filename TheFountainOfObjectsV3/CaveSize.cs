@@ -1,6 +1,6 @@
 ﻿namespace TheFountainOfObjectsV3
 {
-    // Enums -
+    // Enums
     public enum CaveSize
     {
         Small,

@@ -2,9 +2,7 @@
 {
     public class CaveRoom
     {
-        // VARIABLES -
-
-        // PROPERTIES -
+        // PROPERTIES
         public Location Location { get; set; }
 
         public CaveRoomType CaveRoomType { get; set; }
@@ -15,7 +13,7 @@
 
         public Amarok? Amarok { get; set; }
 
-        // CONSTRUCTORS -
+        // CONSTRUCTORS
         // TO DO: Rename row and column
         public CaveRoom(int row, int column)
         {
@@ -60,7 +58,8 @@
             }
         }
 
-        // METHODS -
+        // METHODS
+        // Gets the cave room types of all cave rooms adjacent to the current cave room.
         public List<CaveRoomType> GetAdjacentCaveRoomTypes(Cave cave)
         {
             List<CaveRoomType> adjacentCaveRoomTypes = new List<CaveRoomType>() { };
@@ -88,6 +87,7 @@
 
         // TO DO: Combine CheckAdjacentCaveRoomsForMaelstroms and CheckAdjacentCaveRoomsForAmaroks into one method that takes a CreatureType parameter.
         // TO DO: Consider moving to Player class.
+        // Checks all cave rooms adjacent to the current cave room for Maelstroms.
         public bool CheckAdjacentCaveRoomsForMaelstroms(Cave cave)
         {
             for (int deltaRow = -1; deltaRow <= 1; deltaRow++)
@@ -113,6 +113,7 @@
             return false;
         }
 
+        // Checks all cave rooms adjacent to the current cave room for Amaroks.
         public bool CheckAdjacentCaveRoomsForAmaroks(Cave cave)
         {
             for (int deltaRow = -1; deltaRow <= 1; deltaRow++)
